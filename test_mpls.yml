@@ -1,0 +1,11 @@
+tests_include:
+  - test_mpls_interface
+
+test_mpls_interface:
+  - command: show mpls interface detail
+  - iterate:
+     xpath: '/mpls-interface-information/mpls-interface-detail'
+     id: interface-name
+     tests:
+       - no-diff: mpls-interface-state
+       - no-diff: maximum-labels

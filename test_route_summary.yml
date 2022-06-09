@@ -1,0 +1,18 @@
+tests_include:
+  - test_route_summary
+
+test_route_summary:
+  - command: show route summary
+  - iterate:
+      xpath: '/route-summary-information/route-table'
+      id: table-name
+      tests:
+        - no-diff: destination-count
+          err: "Test FAILED: <{{id_0}}> destination-count was <{{pre['destination-count']}}>
+                 NOW is <{{post['destination-count']}}>"
+          info: "Test PASSED: <{{id_0}}> destination-count same, <{{pre['destination-count']}}>
+                 NOW is <{{post['destination-count']}}>"
+        - no-diff: total-route-count
+        - no-diff: active-route-count
+        - no-diff: holddown-route-count
+        - no-diff: hidden-route-count

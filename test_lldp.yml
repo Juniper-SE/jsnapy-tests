@@ -1,0 +1,16 @@
+tests_include:
+  - test_lldp
+
+test_lldp:
+  - command:  show lldp neighbors
+  - iterate:
+      xpath: '/lldp-neighbors-information/lldp-neighbor-information'
+      #id: ./
+      id: lldp-local-port-id
+      tests:
+       #- no-diff: lldp-local-port-id
+       - no-diff: lldp-local-parent-interface-name
+       - no-diff: lldp-remote-chassis-id-subtype
+       - no-diff: lldp-remote-chassis-id
+       - no-diff: lldp-remote-port-description
+       - no-diff: lldp-remote-system-name

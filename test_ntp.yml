@@ -1,0 +1,36 @@
+tests_include:
+  - test_ntp_source
+  - test_ntp_status
+  - test_ntp_association
+
+test_ntp_source:
+  - rpc: get-config
+  - kwargs:
+      filter_xml: configuration/system/ntp
+  - item:
+      xpath: /configuration/system/ntp
+      tests:
+        - exists: //source-address[1]/name
+          info: "Test PASSED: NTP source-address is set to <{{post['//source-address[1]/name']}}>."
+          err: "Test FAILED: No NTP source-address is set!!!"
+        - not-exists: //source-address[2]/name
+          info: "Test PASSED: No Second NTP source set"
+          err: "Test FAILED: Second NTP source is set to <{{post['//source-address[2]/name']}}>."
+
+test_ntp_status:
+  - command: show ntp status
+  - item:
+      xpath: '/output'
+      tests:
+        - contains: /output, refid
+          info: "Test PASSED: <{{post['/output']}}>"
+          err: "Test FAILED: <{{post['/output']}}>"
+
+test_ntp_association:
+  - command: show ntp association
+  - item:
+      xpath: '/output'
+      tests:
+        - contains: /output, refid
+          info: "Test PASSED: <{{post['/output']}}>"
+          err: "Test FAILED: <{{post['/output']}}>"

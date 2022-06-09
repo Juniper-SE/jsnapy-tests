@@ -1,0 +1,31 @@
+tests_include:
+  - test_ospf3_neighbor
+  - test_ospf3_interface
+
+test_ospf3_neighbor:
+  - command: show ospf3 neighbor detail
+  - iterate:
+     xpath: '/ospf3-neighbor-information/ospf3-neighbor'
+     id: interface-name
+     tests:
+       - no-diff: ospf-neighbor-state
+         err: "Test FAILED: ospf-neighbor-state changed, before <{{id_0}}> was <{{pre['ospf-neighbor-state']}}>
+                         NOW <{{id_0}}> is <{{post['admin-status']}}>"
+         info: "Test PASSED: ospf-neighbor-state is same, before <{{id_0}}> was <{{pre['ospf-neighbor-state']}}>
+                          NOW it is <{{post['ospf-neighbor-state']}}>"
+       - no-diff: neighbor-id
+       - no-diff: neighbor-priority
+       - no-diff: neighbor-address
+       - no-diff: ospf-area
+
+test_ospf3_interface:
+  - command: show ospf3 interface
+  - iterate:
+     xpath: '/ospf3-interface-information/ospf3-interface'
+     id: interface-name
+     tests:
+       - no-diff: ospf-interface-state
+       - no-diff: ospf-area
+       - no-diff: dr-id
+       - no-diff: bdr-id
+       - no-diff: neighbor-count

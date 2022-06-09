@@ -1,0 +1,15 @@
+tests_include:
+  - test_bfd_session
+
+test_bfd_session:
+  - command:  show bfd session extensive
+  - iterate:
+      xpath: '/bfd-session-information/bfd-session'
+      id: session-neighbor
+      tests:
+       - no-diff: session-state
+       - no-diff: session-interface
+       - no-diff: bfd-client/client-name
+       - no-diff: local-diagnostic
+       - no-diff: remote-diagnostic
+       - no-diff: session-type

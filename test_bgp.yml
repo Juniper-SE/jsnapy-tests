@@ -1,0 +1,50 @@
+tests_include:
+  - test_bgp_summary
+#  - test_bgp_neighbor
+
+test_bgp_summary:
+  - command: show bgp summary
+  - iterate:
+     xpath: '/bgp-information/bgp-peer'
+     id: peer-address
+     tests:
+       - no-diff: peer-as
+         err: "Test FAILED: <{{pre['peer-address']}}> peer-as was <{{pre['peer-as']}}>
+                         NOW <{{post['peer-address']}}>  is <{{post['peer-as']}}>"
+         info: "Test PASSED: <{{id_0}}> peer-as same, <{{pre['peer-as']}}>
+                          NOW it is <{{post['peer-as']}}>"
+       - no-diff: peer-state
+         err: "Test FAILED: <{{id_0}}> peer-state was <{{pre['peer-state']}}>
+                         NOW <{{id_0}}>  is <{{post['peer-state']}}>"
+         info: "Test PASSED: <{{id_0}}> peer-state same, <{{pre['peer-state']}}>
+                          NOW it is <{{post['peer-state']}}>"
+       - no-diff: bgp-rib/name
+       - no-diff: bgp-rib/active-prefix-count
+       - no-diff: bgp-rib/received-prefix-count
+       - no-diff: bgp-rib/accepted-prefix-count
+       - no-diff: bgp-rib/suppressed-prefix-count
+
+test_bgp_neighbor:
+  - command: show bgp neighbor
+  - iterate:
+     xpath: '/bgp-information/bgp-peer'
+     id: peer-address
+     tests:
+       - no-diff: peer-as
+         err: "Test FAILED: <{{pre['peer-address']}}> peer-as was <{{pre['peer-as']}}>
+                         NOW <{{post['peer-address']}}>  is <{{post['peer-as']}}>"
+         info: "Test PASSED: <{{id_0}}> peer-as same, <{{pre['peer-as']}}>
+                          NOW it is <{{post['peer-as']}}>"
+       - no-diff: peer-state
+         err: "Test FAILED: <{{id_0}}> peer-state was <{{pre['peer-state']}}>
+                         NOW <{{id_0}}>  is <{{post['peer-state']}}>"
+         info: "Test PASSED: <{{id_0}}> peer-state same, <{{pre['peer-state']}}>
+                          NOW it is <{{post['peer-state']}}>"
+       - no-diff: bgp-rib/name
+       - no-diff: bgp-rib/active-prefix-count
+       - no-diff: bgp-rib/received-prefix-count
+       - no-diff: bgp-rib/accepted-prefix-count
+       - no-diff: bgp-rib/suppressed-prefix-count
+       - no-diff: bgp-rib/advertised-prefix-count
+       - no-diff: bgp-bfd/bfd-configuration-state
+       - no-diff: bgp-bfd/bfd-operational-state

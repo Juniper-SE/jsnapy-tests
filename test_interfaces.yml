@@ -1,0 +1,24 @@
+tests_include:
+  - test_interfaces
+
+test_interfaces:
+  - command: show interfaces
+  - iterate:
+      xpath: '/interface-information/physical-interface'
+      id: name
+      tests:
+        - no-diff: admin-status
+          err: "Test FAILED: admin-status got changed, before <{{pre['name']}}> was <{{pre['admin-status']}}>
+                NOW <{{post['name']}}> is <{{post['admin-status']}}>"
+          info: "Test PASSED: admin-status is same, before <{{pre['name']}}> was <{{pre['admin-status']}}>
+                 NOW it is <{{post['admin-status']}}>"
+        - no-diff: oper-status
+          err: "Test FAILED: oper-status got changed, before <{{pre['name']}}> was <{{pre['oper-status']}}>
+                NOW <{{post['name']}}> is <{{post['oper-status']}}>"
+          info: "Test PASSED: oper-status is same, before <{{pre['name']}}> was <{{pre['oper-status']}}>
+                 NOW it is <{{post['oper-status']}}>"
+        - no-diff: description
+          err: "Test FAILED: descr got changed, before <{{pre['name']}}> was <{{pre['description']}}>
+                NOW <{{post['name']}}> is <{{post['description']}}>"
+          info: "Test PASSED: descr is same, before <{{pre['name']}}> was <{{pre['description']}}>
+                 NOW it is <{{post['description']}}>"

@@ -1,0 +1,28 @@
+tests_include:
+  - test_chassis_alarms
+  - test_chassis_hardware
+  - test_chassis_routing_engine
+  - test_system_uptime_multi_re
+
+test_chassis_alarms:
+  - command: show chassis alarms
+
+test_chassis_hardware:
+  - command: show chassis hardware
+
+test_chassis_routing_engine:
+  - command: show chassis routing-engine
+  - iterate:
+     xpath: '/route-engine-information/route-engine'
+     id: slot
+     tests:
+       - no-diff: status
+       - no-diff: mastership-state
+
+test_system_uptime_multi_re:
+  - command: show system uptime
+  - iterate:
+     xpath: '/multi-routing-engine-results/multi-routing-engine-item'
+     id: re-name
+     tests:
+       - no-diff: system-uptime-information/time-source

@@ -1,0 +1,16 @@
+tests_include:
+  - test_host
+  - test_google
+
+test_host:
+  - command: show host 8.8.8.8
+
+test_google:
+  - command: show host dns.google.
+  - item:
+      xpath: '/output'
+      tests:
+        - contains: /output, 8.8.8.8
+        - contains: /output, 8.8.4.4
+        - contains: /output, 2001:4860:4860::8844
+        - contains: /output, 2001:4860:4860::8888

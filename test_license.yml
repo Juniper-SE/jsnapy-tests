@@ -1,0 +1,16 @@
+tests_include:
+  - test_license_delta
+#  - test_license_needed
+
+test_license_delta:
+  - command: show system license
+
+test_license_needed:
+  - command: show system license
+  - iterate:
+     xpath: '/license-summary-information/license-usage-summary/feature-summary'
+     id: name
+     tests:
+       - is-equal: needed, 0
+         err: "Test FAILED: License NEEDED for <{{id_0}}>"
+         info: "Test PASSED: License NOT needed for <{{id_0}}>"

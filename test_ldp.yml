@@ -1,0 +1,23 @@
+tests_include:
+  - test_ldp_neighbor
+  - test_ldp_session
+
+test_ldp_neighbor:
+  - command: show ldp neighbor extensive
+  - iterate:
+     xpath: '/ldp-neighbor-information/ldp-neighbor'
+     id: ldp-neighbor-address
+     tests:
+       - no-diff: interface-name
+       - no-diff: ldp-label-space-id
+       - no-diff: ldp-transport-address
+       - no-diff: ldp-neighbor-types/ldp-neighbor-type
+
+test_ldp_session:
+  - command: show ldp session extensive
+  - iterate:
+     xpath: '/ldp-session-information/ldp-session'
+     id: ldp-neighbor-address
+     tests:
+       - no-diff: ldp-session-state
+       - no-diff: ldp-connection-state
