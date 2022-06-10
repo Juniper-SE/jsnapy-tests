@@ -1,12 +1,5 @@
 tests_include:
-  - test_version_multi_re
+  - test_version
 
-test_version_multi_re:
+test_version:
   - command: show version
-  - iterate:
-     xpath: '/multi-routing-engine-results/multi-routing-engine-item'
-     id: re-name
-     tests:
-       - exists: software-information/product-model
-       - exists: software-information/junos-version
-       - exists: software-information/junos-edition

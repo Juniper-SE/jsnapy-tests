@@ -1,8 +1,29 @@
 tests_include:
-  - test_command_routes
+  - test_route_summary
+  - test_route
 
-test_command_routes:
-  - command: show route
+test_route_summary:
+  - rpc: get-route-summary-information
+  - kwargs:
+      dev_timeout: 120
+  - iterate:
+      xpath: '/route-summary-information/route-table'
+      id: table-name
+      tests:
+        - no-diff: destination-count
+          err: "Test FAILED: <{{id_0}}> destination-count was <{{pre['destination-count']}}>
+                 NOW is <{{post['destination-count']}}>"
+          info: "Test PASSED: <{{id_0}}> destination-count same, <{{pre['destination-count']}}>
+                 NOW is <{{post['destination-count']}}>"
+        - no-diff: total-route-count
+        - no-diff: active-route-count
+        - no-diff: holddown-route-count
+        - no-diff: hidden-route-count
+
+test_route:
+  - rpc: get-route-information
+  - kwargs:
+      dev_timeout: 120
   - iterate:
       xpath: '/route-information/route-table/rt'
       id: rt-destination
@@ -17,14 +38,3 @@ test_command_routes:
                   NOW it is <{{post['rt-destination']}}> via <{{post['rt-entry/nh/to']}}>"
            info: "Test PASSED: Next-Hop is same, before it was <{{pre['rt-destination']}}> via <{{pre['rt-entry/nh/to']}}>
                    NOW it is still via <{{post['rt-entry/nh/to']}}>"
-
-
-#  - iterate:
-#      xpath: '/route-information/route-table/rt'
-#      id: rt-destination
-#      tests:
-#          - no-diff: rt-entry/nh/to
-#            err: "Test FAILED: Next-Hop changed, before it was <{{pre['rt-destination']}}> via <{{pre['rt-entry/nh/to']}}>
-#                  NOW it is via <{{post['rt-entry/nh/to']}}>"
-#            info: "Test PASSED: Next-Hop is same, before it was <{{pre['rt-destination']}}> via <{{pre['rt-entry/nh/to']}}>
-#                   NOW it is still via <{{post['rt-entry/nh/to']}}>"

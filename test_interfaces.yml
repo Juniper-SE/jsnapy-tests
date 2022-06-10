@@ -2,7 +2,9 @@ tests_include:
   - test_interfaces
 
 test_interfaces:
-  - command: show interfaces
+  - rpc: get-interface-information
+  - kwargs:
+      dev_timeout: 120
   - iterate:
       xpath: '/interface-information/physical-interface'
       id: name

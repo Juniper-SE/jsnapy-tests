@@ -2,7 +2,9 @@ tests_include:
   - test_route_summary
 
 test_route_summary:
-  - command: show route summary
+  - rpc: get-route-summary-information
+  - kwargs:
+      dev_timeout: 120
   - iterate:
       xpath: '/route-summary-information/route-table'
       id: table-name

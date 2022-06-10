@@ -34,3 +34,6 @@ test_ntp_association:
         - contains: /output, refid
           info: "Test PASSED: <{{post['/output']}}>"
           err: "Test FAILED: <{{post['/output']}}>"
+        - not-contains: /output, .INIT.
+          info: "Test PASSED: <{{post['/output']}}>"
+          err: "Test FAILED: <{{post['/output']}}>"

@@ -1,0 +1,22 @@
+tests_include:
+  - test_system_uptime
+  - test_system_uptime_multi_re
+
+test_system_uptime:
+#  - rpc: get-system-uptime-information
+  - command: show system uptime
+  - ignore-null: True
+  - iterate:
+     xpath: '/system-uptime-information'
+     id: last-configured-time/user
+     tests:
+       - no-diff: /time-source
+
+test_system_uptime_multi_re:
+  - command: show system uptime
+  - ignore-null: True
+  - iterate:
+     xpath: '/multi-routing-engine-results/multi-routing-engine-item'
+     id: re-name
+     tests:
+       - no-diff: system-uptime-information/time-source

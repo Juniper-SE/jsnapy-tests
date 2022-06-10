@@ -1,8 +1,8 @@
 tests_include:
-  - test_ospf3_neighbor
-  - test_ospf3_interface
+  - test_ospf_neighbor
+  - test_ospf_interface
 
-test_ospf3_neighbor:
+test_ospf_neighbor:
   - command: show ospf neighbor detail
   - iterate:
      xpath: '/ospf-neighbor-information/ospf-neighbor'
@@ -18,7 +18,7 @@ test_ospf3_neighbor:
        - no-diff: neighbor-address
        - no-diff: ospf-area
 
-test_ospf3_interface:
+test_ospf_interface:
   - command: show ospf interface
   - iterate:
      xpath: '/ospf-interface-information/ospf-interface'
