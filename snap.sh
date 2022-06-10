@@ -52,6 +52,11 @@ then
   jsnapy --snap post -l $user -p $password -f $YAML
   jsnapy --check pre post -f $YAML -v
   exit
+
+elif [ "$1" = "checkdebug" ]
+then
+  jsnapy --check pre post -f $YAML -v
+  exit
 fi
 
-echo "snap.sh <pre|post|check|test|debug> <config_check.yml>"
+echo "snap.sh <pre|post|check|test|debug|checkdebug> <config_check.yml>"
