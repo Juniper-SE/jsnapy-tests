@@ -1,37 +1,26 @@
     hosts:
-        #QFX5120-45
+    #QFX5120-45
       - device: 172.25.92.59
-#        timeout: 120
-        #QFX5120-46
-#      - device: 172.25.92.60
-#        timeout: 120
-        #EX4300-29
-#      - device: 172.25.45.195
-#        timeout: 120
-        #EX4300-51
-#      - device: 172.25.91.175
-#        timeout: 120
-#       SRX1500
-#      - device: 172.16.1.1
-        #vSRX3
-#      - device: 172.16.150.133
-#        port: 22
-#      - device: 192.168.3.4
+        timeout: 120
+    #QFX5120-46
+      - device: 172.25.92.60
+        timeout: 120
+        port: 22
 
     tests:
-       - test_version.yml
-       - test_chassis.yml
-       - test_system.yml
-       - test_license.yml
-       - test_ntp.yml
-       - test_host.yml
-       - test_lldp.yml
-       - test_interfaces.yml
-       - test_bfd.yml
-       - test_ospf.yml
-       - test_ospf3.yml
-       - test_ldp.yml
-       - test_mpls.yml
-       - test_bgp.yml
-       - test_route_summary.yml
-       - test_route.yml
+      - test_version.yml
+      - test_chassis.yml
+      - test_system.yml
+      - test_license.yml
+      - test_ntp.yml
+      - test_host.yml
+      - test_lldp.yml
+      - test_interfaces.yml
+      - test_bfd.yml
+      - test_ospf.yml
+      - test_ospf3.yml
+      - test_ldp.yml
+      - test_mpls.yml
+      - test_bgp.yml
+      - test_route_summary.yml
+      - test_route.yml
