@@ -1,8 +1,8 @@
     hosts:
-    #QFX5120-45
+      #QFX5120-45
       - device: 172.25.92.59
         timeout: 120
-    #QFX5120-46
+      #QFX5120-46
       - device: 172.25.92.60
         timeout: 120
         port: 22
