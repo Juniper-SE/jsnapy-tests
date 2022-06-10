@@ -12,6 +12,6 @@ I have tried to make these as universal as possible (for example single and mult
 
 Running test for protocols that are not running or not supported on a platform should just report a fail on that test.  I have tested the best I could to avoid Exceptions but YMMV.
 
-snap.py is a simple bash wrapper to call jsnap and prompt for username/password and some other options.
+snap.sh is a simple bash wrapper to call jsnap and prompt for username/password and some other options.
 
 I welcome comments and contributions to the repo.
