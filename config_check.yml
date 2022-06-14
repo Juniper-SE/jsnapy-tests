@@ -21,6 +21,4 @@
       - test_ospf3.yml
       - test_ldp.yml
       - test_mpls.yml
-      - test_bgp.yml
-      - test_route_summary.yml
       - test_route.yml
